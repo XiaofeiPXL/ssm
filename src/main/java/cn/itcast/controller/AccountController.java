@@ -1,9 +1,12 @@
 package cn.itcast.controller;
 
+import cn.itcast.domain.Account;
 import cn.itcast.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * @program: ssm
@@ -20,7 +23,10 @@ public class AccountController {
 
     @RequestMapping("/findAll")
     public String findAll() {
-        accountService.findAll();
+        List<Account> accountList = accountService.findAll();
+        for (Account account:accountList){
+            System.out.println(account);
+        }
         return "list";
     }
 }
