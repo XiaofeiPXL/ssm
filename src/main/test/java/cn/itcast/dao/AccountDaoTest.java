@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * @program: ssm
  * @description:
@@ -46,8 +44,8 @@ public class AccountDaoTest {
     @Test
     public void saveAccount() {
         Account account = new Account();
-        account.setName("xiaolin");
-        account.setMoney(10000d);
+        account.setName("huahua");
+        account.setMoney(20d);
         accountDao.saveAccount(account);
     }
 
@@ -57,5 +55,20 @@ public class AccountDaoTest {
         for(Account account:accountList){
             System.out.println(account);
         }
+    }
+
+    @Test
+    public void findById() {
+        Account account = accountDao.findById(1);
+        System.out.println(account);
+    }
+
+    @Test
+    public void updateAccount() {
+        Account account = new Account();
+        account.setName("点点");
+        account.setId(3);
+        account.setMoney(100d);
+        accountDao.updateAccount(account);
     }
 }
