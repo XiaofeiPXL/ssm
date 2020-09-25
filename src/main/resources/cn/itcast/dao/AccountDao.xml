@@ -3,18 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.AccountDao">
-    <sql id="defaultSql">
-        select * from account;
-    </sql>
-    <select id="findAll" resultType="Account">
-        <include refid="defaultSql"/>
+    <resultMap id="accountUser" type="account">
+        <id property="id" column="ID"/>
+        <result property="uid" column="UID"/>
+        <result property="money" column="MONEY"/>
+        <!--column属性的值和数据表外键值一致,association标签配置的是从表中封装的主表对象-->
+        <association property="user" javaType="user" column="UID">
+            <id property="id" column="id"/>
+            <result property="username" column="username"/>
+            <result property="birthday" column="birthday"/>
+            <result property="sex" column="sex"/>
+            <result property="address" column="address"/>
+        </association>
+    </resultMap>
+
+    <select id="findAll" resultMap="accountUser">
+        select a.*,u.username,u.address,u.birthday,u.sex from account a,user u where a.UID = u.id;
     </select>
-
-    <insert id="saveAccount" parameterType="account">
-        insert into account(name,money) values(#{name},#{money});
-    </insert>
-
-    <update id="updateAccount" parameterType="account">
-        update account set name=#{name},money=#{money} where id=#{id};
-    </update>
 </mapper>

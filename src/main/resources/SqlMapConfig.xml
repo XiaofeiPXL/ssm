@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <properties resource="jdbc.properties"/>
+    <settings>
+        <!--配置二级缓存第一步,在myBatis主配置文件中设置-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
     <typeAliases>
         <!--domain下面所有的类都可以使用类名的小写作为别名,但是只能配置entity或者domain下面的包-->
         <package name="cn.itcast.domain"/>

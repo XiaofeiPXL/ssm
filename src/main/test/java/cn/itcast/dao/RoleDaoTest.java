@@ -1,9 +1,8 @@
 package cn.itcast.dao;
 
-import cn.itcast.domain.Account;
+import cn.itcast.domain.Role;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
 import org.junit.Before;
@@ -13,27 +12,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * @program: ssm
  * @description:
  * @author: Xiaofei Wang
- * @created: 2020/09/24 14:43
+ * @created: 2020/09/24 16:31
  */
 
 
-public class AccountDaoTest {
+public class RoleDaoTest {
+
     private SqlSession sqlSession;
     private InputStream inputStream;
-    private AccountDao accountDao;
+    private RoleDao roleDao;
 
     @Before
     public void init() throws IOException {
         inputStream = Resources.getResourceAsStream("SqlMapConfig.xml");
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        sqlSession = sqlSessionFactory.openSession(true);
-        accountDao = sqlSession.getMapper(AccountDao.class);
+        sqlSession = new SqlSessionFactoryBuilder().build(inputStream).openSession(true);
+        roleDao = sqlSession.getMapper(RoleDao.class);
     }
 
     @After
@@ -41,11 +38,12 @@ public class AccountDaoTest {
         sqlSession.close();
         inputStream.close();
     }
+
     @Test
     public void findAll() {
-       List<Account> accountList = accountDao.findAll();
-       for(Account account:accountList){
-           System.out.println(account);
-       }
+        List<Role> roleList = roleDao.findAll();
+        for(Role role:roleList){
+            System.out.println(role);
+        }
     }
 }

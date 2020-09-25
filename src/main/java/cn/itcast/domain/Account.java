@@ -12,16 +12,20 @@ import java.io.Serializable;
 
 public class Account implements Serializable {
     private Integer id;
-    private String name;
+    private Integer uid;
     private Double money;
+
+    //从表实体应该包含一个主表实体的对象引用
+    private User user;
 
     public Account() {
     }
 
-    public Account(Integer id, String name, Double money) {
+    public Account(Integer id, Integer uid, Double money, User user) {
         this.id = id;
-        this.name = name;
+        this.uid = uid;
         this.money = money;
+        this.user = user;
     }
 
     public Integer getId() {
@@ -32,12 +36,12 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     public Double getMoney() {
@@ -52,7 +56,7 @@ public class Account implements Serializable {
     public String toString() {
         return "Account{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", uid=" + uid +
                 ", money=" + money +
                 '}';
     }
