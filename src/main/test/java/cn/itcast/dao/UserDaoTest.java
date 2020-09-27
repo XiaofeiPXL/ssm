@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.jdbc.support.SQLStateSQLExceptionTranslator;
 
 import java.io.IOException;
 import java.io.InputStream;

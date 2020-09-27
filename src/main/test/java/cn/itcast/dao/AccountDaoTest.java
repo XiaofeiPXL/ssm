@@ -1,19 +1,12 @@
 package cn.itcast.dao;
 
+import cn.itcast.BaseTest;
 import cn.itcast.domain.Account;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
-import static org.junit.Assert.*;
 
 /**
  * @program: ssm
@@ -23,29 +16,18 @@ import static org.junit.Assert.*;
  */
 
 
-public class AccountDaoTest {
-    private SqlSession sqlSession;
-    private InputStream inputStream;
-    private AccountDao accountDao;
+public class AccountDaoTest extends BaseTest {
 
-    @Before
-    public void init() throws IOException {
-        inputStream = Resources.getResourceAsStream("SqlMapConfig.xml");
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        sqlSession = sqlSessionFactory.openSession(true);
-        accountDao = sqlSession.getMapper(AccountDao.class);
-    }
+    private SqlSession sqlSession = init();
 
-    @After
-    public void destroy() throws IOException {
-        sqlSession.close();
-        inputStream.close();
-    }
     @Test
     public void findAll() {
-       List<Account> accountList = accountDao.findAll();
-       for(Account account:accountList){
-           System.out.println(account);
-       }
+        AccountDao accountDao = sqlSession.getMapper(AccountDao.class);
+        List<Account> accountList = accountDao.findAll();
+        for (Account account : accountList) {
+            System.out.println(account);
+        }
+        BaseTest.destroy(sqlSession,null,null);
     }
+
 }
